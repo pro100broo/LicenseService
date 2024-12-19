@@ -12,6 +12,16 @@ import ru.mtuci.license_service.utils.LicenseServiceException;
 
 import java.util.*;
 
+//TODO: 1. createLicense - а если пользователь захочет больше устройств?
+//TODO: 2. createLicense - Неверно устанавливается пользователь при создании лицензии
+//TODO: 3. activateLicense - что будет, если пользователь активирует лицензию на новом устройстве, которого ещё нет в БД
+//TODO: 4. activateLicense - странная проверка доступного количества устройств, когда вы по умолчанию задаёте 10
+//TODO: 5. setLicenseTimestamps - у вас дата истечения не зависит от даты первой активации
+//TODO: 6. activateLicense - что будет при первой активации, когда дата истечения null?
+//TODO: 7. activateLicense - один пользователь может активировать лицензию другого?
+//TODO: 8. updateLicense - один пользователь может изменить лицензию другого?
+//TODO: 9. License и LicenseHistory - разные сущности. Хорошо бы разделить на разные классы операции с ними
+
 @Service
 @RequiredArgsConstructor
 public class LicenseService {

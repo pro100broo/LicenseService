@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ru.mtuci.license_service.servicies.UserService;
 
+//TODO: 1. Интересное решение
 
 @Configuration
 @EnableWebSecurity

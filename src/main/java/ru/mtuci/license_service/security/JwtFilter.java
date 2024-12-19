@@ -22,6 +22,7 @@ import ru.mtuci.license_service.utils.LicenseServiceException;
 
 import java.io.IOException;
 
+//TODO: Интересное решение
 
 @Component
 @RequiredArgsConstructor

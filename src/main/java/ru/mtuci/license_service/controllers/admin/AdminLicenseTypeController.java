@@ -10,6 +10,7 @@ import ru.mtuci.license_service.models.rest.request.CreateLicenseType;
 import ru.mtuci.license_service.models.rest.response.GenericResponse;
 import ru.mtuci.license_service.servicies.LicenseTypeService;
 
+//TODO: 1. А как пользователю получить информацию по типам лицензий? Добавить операций
 
 @RestController
 @RequestMapping("/api/v1/admin/licenseTypes")

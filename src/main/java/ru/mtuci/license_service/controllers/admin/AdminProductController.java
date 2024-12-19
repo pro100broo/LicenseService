@@ -11,6 +11,7 @@ import ru.mtuci.license_service.servicies.ProductService;
 
 import java.util.List;
 
+//TODO: 1. Добавить операций
 
 @RestController
 @RequestMapping("/api/v1/admin/products")
