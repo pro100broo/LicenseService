@@ -17,6 +17,7 @@ import ru.mtuci.license_service.models.rest.security.SignUp;
 import ru.mtuci.license_service.security.AuthenticationService;
 import ru.mtuci.license_service.servicies.UserService;
 
+//TODO: 1. Интересно будет подробнее с вами пообщаться по работе
 
 @RestController
 @RequestMapping("/auth")

@@ -10,6 +10,7 @@ import ru.mtuci.license_service.servicies.LicenseTypeService;
 
 import java.util.List;
 
+//TODO: 1. Добавить операций
 
 @RestController
 @RequestMapping("/api/v1/userService/licenseTypes")

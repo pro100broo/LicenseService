@@ -12,6 +12,8 @@ import ru.mtuci.license_service.utils.LicenseServiceException;
 import java.util.List;
 import java.util.Optional;
 
+//TODO: 1. updateDevice - для чего менять пользователя?
+
 @Service
 @RequiredArgsConstructor
 public class DeviceService {
