@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.mtuci.license_service.models.orm.Product;
+import ru.mtuci.license_service.models.rest.request.UpdateProduct;
 import ru.mtuci.license_service.models.rest.response.GenericResponse;
 import ru.mtuci.license_service.servicies.ProductService;
 
-import java.util.List;
-
 
 @RestController
-@RequestMapping("/api/v1/admin/products")
+@RequestMapping("/api/v1/adminService/products")
 @RequiredArgsConstructor
 public class AdminProductController {
     private final ProductService service;
@@ -32,11 +31,12 @@ public class AdminProductController {
         }
     }
 
-    @GetMapping("/getAll")
-    public ResponseEntity<?> getProducts() {
+    @PatchMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateProduct(@RequestBody UpdateProduct product) {
         try {
-            List<Product> products = service.getProducts();
-            return ResponseEntity.status(HttpStatus.OK).body(products);
+            Product updatedProduct = service.updateProduct(product);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
 
         } catch (Exception ex) {
             return ResponseEntity

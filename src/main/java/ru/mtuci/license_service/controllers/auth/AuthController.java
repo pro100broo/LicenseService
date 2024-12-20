@@ -1,4 +1,4 @@
-package ru.mtuci.license_service.controllers.userService;
+package ru.mtuci.license_service.controllers.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

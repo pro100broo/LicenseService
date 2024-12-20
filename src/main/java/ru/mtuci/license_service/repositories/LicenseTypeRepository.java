@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface LicenseTypeRepository extends JpaRepository<LicenseType, Long> {
     Optional<LicenseType> findByName(String name);
 
-    @Query(value = "SELECT * FROM license_type")
+    @Query(value = "SELECT * FROM license_type", nativeQuery = true)
     List<LicenseType> findAllLicenseTypes();
 }

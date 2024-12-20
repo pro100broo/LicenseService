@@ -57,8 +57,11 @@ public class JwtService {
         return extractClaim(extractToken(request), Claims::getExpiration);
     }
 
-    private String extractToken(HttpServletRequest request) {
+    private String extractToken(HttpServletRequest request) throws LicenseServiceException {
         String authHeader = request.getHeader(HEADER_NAME);
+        if (authHeader == null){
+            throw new LicenseServiceException("Bearer token not specified");
+        }
         return authHeader.substring(BEARER_PREFIX.length());
     }
 

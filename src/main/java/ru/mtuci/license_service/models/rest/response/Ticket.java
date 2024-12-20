@@ -18,6 +18,8 @@ public class Ticket {
     private Date expirationDate;
     private Long userId;
     private Long deviceId;
+    private Long productId;
+    private Long licenseTypeId;
     private boolean licenseBlocked;
     private String digitalSignature;
     private String info;

@@ -15,6 +15,7 @@ import ru.mtuci.license_service.servicies.DeviceService;
 import ru.mtuci.license_service.servicies.UserService;
 import ru.mtuci.license_service.utils.LicenseServiceException;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -54,7 +55,7 @@ public class DeviceController {
         }
     }
 
-    @PostMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<?> updateDevice(@RequestBody UpdateDevice deviceData, HttpServletRequest request) {
         try {
             Device device = deviceService.updateDevice(resolveUser(request), deviceData);
@@ -67,7 +68,7 @@ public class DeviceController {
         }
     }
 
-    @GetMapping("/delete/{device_id}")
+    @DeleteMapping("/delete/{device_id}")
     public ResponseEntity<?> deleteDevice(@PathVariable Long device_id, HttpServletRequest request) {
         try {
             String username = jwtService.extractUserName(request);

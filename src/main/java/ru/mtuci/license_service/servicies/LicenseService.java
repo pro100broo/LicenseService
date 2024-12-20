@@ -41,7 +41,6 @@ public class LicenseService {
         }
 
         String code = String.valueOf(UUID.randomUUID());
-        Long defaultDeviceCount = 10L;
         String defaultStatus = "Not active";
         String defaultDescription = "Another license";
 
@@ -52,7 +51,7 @@ public class LicenseService {
         newLicense.setProduct(product.get());
         newLicense.setType(confirmedLicenseType);
         newLicense.setBlocked(false);
-        newLicense.setDeviceCount(defaultDeviceCount);
+        newLicense.setDeviceCount(0L);
         newLicense.setUser(user);
         newLicense.setDuration(confirmedLicenseType.getDefaultDuration());
         newLicense.setDescription(confirmedLicenseType.getDescription());
@@ -81,7 +80,7 @@ public class LicenseService {
         License confirmedLicense = license.get();
         Device confirmedDevice = device.get();
 
-        if (confirmedLicense.getDeviceCount() >= 10) {
+        if (confirmedLicense.getDeviceCount() == 10) {
             throw new LicenseServiceException("Devices count exceeded for specified license");
         }
 
@@ -89,19 +88,20 @@ public class LicenseService {
             throw new LicenseServiceException("Specified license is blocked. Try another license");
         }
 
-        if (new Date().after(confirmedLicense.getEndingDate())) {
+        if (
+                confirmedLicense.getEndingDate() != null &&
+                new Date().after(confirmedLicense.getEndingDate())
+        ) {
             throw new LicenseServiceException("License has expired. You need to renew it");
         }
 
-        if (confirmedLicense.getEndingDate() != null) {
-            confirmedLicense = setLicenseTimestamps(confirmedLicense);
-        }
-
+        confirmedLicense = setLicenseTimestamps(confirmedLicense);
         confirmedLicense.setDeviceCount(confirmedLicense.getDeviceCount() + 1);
 
         License activatedLicense = licenseRepository.save(confirmedLicense);
         licenseRepository.flush();
 
+        updateLicenseHistory("Active", user, confirmedLicense);
         addDeviceLicenseHistory(activatedLicense, confirmedDevice);
 
         return ticketService.generateTicket(activatedLicense, confirmedDevice, user);
@@ -185,9 +185,8 @@ public class LicenseService {
         }
 
         confirmedLicense = setLicenseTimestamps(confirmedLicense);
-        License renewedLicense = licenseRepository.save(confirmedLicense);
 
-        return renewedLicense;
+        return licenseRepository.save(confirmedLicense);
     }
 
     public List<License> getLicenses(UserDetailsImpl user) {

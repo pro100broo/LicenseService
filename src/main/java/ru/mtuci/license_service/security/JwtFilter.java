@@ -41,7 +41,8 @@ public class JwtFilter extends OncePerRequestFilter {
             String authHeader = request.getHeader(HEADER_NAME);
 
             if (authHeader == null || authHeader.isEmpty() || !authHeader.startsWith(BEARER_PREFIX)) {
-                throw new LicenseServiceException("Bearer token not specified");
+                filterChain.doFilter(request, response);
+                return;
             }
 
             String username = jwtService.extractUserName(request);
@@ -76,10 +77,8 @@ public class JwtFilter extends OncePerRequestFilter {
                     status,
                     ex.getMessage()
             );
-
             response.setStatus(status);
             response.getOutputStream().print(responseBody);
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         }
     }
 }

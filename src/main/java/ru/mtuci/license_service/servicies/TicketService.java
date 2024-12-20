@@ -21,6 +21,8 @@ public class TicketService {
         ticket.setCurrentDate(new Date());
         ticket.setUserId(user.getId());
         ticket.setDeviceId(device.getId());
+        ticket.setProductId(license.getProduct().getId());
+        ticket.setLicenseTypeId(license.getType().getId());
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

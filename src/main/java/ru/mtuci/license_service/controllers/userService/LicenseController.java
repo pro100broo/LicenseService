@@ -55,7 +55,7 @@ public class LicenseController {
         }
     }
 
-    @PostMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<?> updateLicense(@RequestBody UpdateLicense licenseData, HttpServletRequest request) {
         try {
             License license = licenseService.updateLicense(resolveUser(request), licenseData);
@@ -68,7 +68,7 @@ public class LicenseController {
         }
     }
 
-    @PostMapping("/renew/{code}")
+    @PutMapping("/renew/{code}")
     public ResponseEntity<?> renewLicense(@PathVariable String code, HttpServletRequest request) {
         try {
             License license = licenseService.renewLicense(resolveUser(request), code);
@@ -95,7 +95,7 @@ public class LicenseController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getLicenseInfo(HttpServletRequest request) {
+    public ResponseEntity<?> getLicenses(HttpServletRequest request) {
         try {
             List<License> licenses = licenseService.getLicenses(resolveUser(request));
 
